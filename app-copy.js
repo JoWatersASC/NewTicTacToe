@@ -19,6 +19,7 @@ class Game extends React.Component{
     }
 
     switchPlayer = () => {
+        console.log("swapped");
         let newPlayer
         if(this.state.player.key == "Player 1"){
             newPlayer = {
@@ -75,24 +76,25 @@ class Game extends React.Component{
             });
             return true;
         }
-        else
-        {
-            this.switchPlayer();
-        }
+        return false;
+        // else
+        // {
+        //     this.switchPlayer();
+        // }
     }
 
     clearBoard = (board) => {
         console.log("clear");
         const newTokens = [
-            {id : 1, token : ' '},
-            {id : 2, token : ' '},
-            {id : 3, token : ' '},
-            {id : 4, token : ' '},
-            {id : 5, token : ' '},
-            {id : 6, token : ' '},
-            {id : 7, token : ' '},
-            {id : 8, token : ' '},
-            {id : 9, token : ' '},
+            {id : 1, token : ' ', full : false},
+            {id : 2, token : ' ', full : false},
+            {id : 3, token : ' ', full : false},
+            {id : 4, token : ' ', full : false},
+            {id : 5, token : ' ', full : false},
+            {id : 6, token : ' ', full : false},
+            {id : 7, token : ' ', full : false},
+            {id : 8, token : ' ', full : false},
+            {id : 9, token : ' ', full : false},
         ];
 
         board.setState({
@@ -108,13 +110,13 @@ class Game extends React.Component{
             return space.token;
         });
         
-        this.checkWin(spaceTokens);
-
-        if(this.state.gameOver){
+        if(this.checkWin(spaceTokens)){
             return;
         }
+        
         const nextSpaces = spaces.map((space) => {
-            if(space.id == spaceKey && space.token == " " ){
+            if(space.id == spaceKey && space.token == " "){
+                this.switchPlayer();
                 return Object.assign({}, space, {
                     token : this.state.player.token,
                 });
@@ -169,38 +171,47 @@ class Board extends React.Component {
                 {
                     id: 1,
                     token: " ",
+                    full: false,
                 },
                 {
                     id: 2,
                     token: " ",
+                    full: false,
                 },
                 {
                     id: 3,
                     token: " ",
+                    full: false,
                 },
                 {
                     id: 4,
                     token: " ",
+                    full: false,
                 },
                 {
                     id: 5,
                     token: " ",
+                    full: false,
                 },
                 {
                     id: 6,
                     token: " ",
+                    full: false,
                 },
                 {
                     id: 7,
                     token: " ",
+                    full: false,
                 },
                 {
                     id: 8,
                     token: " ",
+                    full: false,
                 },
                 {
                     id: 9,
                     token: " ",
+                    full: false,
                 },
             ],
         });
